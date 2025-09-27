@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patito Parlante 🦆</title>
+</head>
+<body>
+  <h1>🎙️ Patito Parlante con Detección de Silencio</h1>
+  <button id="iniciar">Iniciar conversación</button>
+  <p id="estado">Esperando...</p>
+  <audio id="player" controls></audio>
+
+  <script>
+    const estado = document.getElementById("estado");
+    const player = document.getElementById("player");
+    const botonIniciar = document.getElementById("iniciar");
+
+    let stream = null;
+    let audioContext = null;
+    let source = null;
+    let analyser = null;
+    let dataArray = null;
+    let mediaRecorder = null;
+
+    const umbralSilencio = 10;  // volumen mínimo para considerar sonido
+    const maxSilencio = 3000;   // ms para detectar silencio (3 segundos)
+    let ultimoSonido = Date.now();
+    let grabando = false;
+
+    // Función para iniciar la grabación con detección de silencio
+    async function empezarGrabacion() {
+      estado.textContent = "⏺️ Grabando... habla ahora";
+
+      if (!stream) {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (source) source.disconnect();
+      source = audioContext.createMediaStreamSource(stream);
+
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 512;
+      source.connect(analyser);
+
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+      const chunks = [];
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.ondataavailable = e => chunks.push(e.data);
+
+      mediaRecorder.onstop = async () => {
+        grabando = false;
+        estado.textContent = "📤 Enviando audio al backend...";
+        const blob = new Blob(chunks, { type: "audio/webm" });
+
+        // Enviar audio grabado a /conversar
+        try {
+          const formData = new FormData();
+          formData.append("audio", blob, "grabacion.webm");
+
+          const response = await fetch("http://localhost:8000/conversar", {
+            method: "POST",
+            body: formData
+          });
+
+          if (!response.ok) throw new Error("Error en el servidor");
+
+          const patoBlob = await response.blob();
+          const patoUrl = URL.createObjectURL(patoBlob);
+
+          player.src = patoUrl;
+          player.play();
+
+          estado.textContent = "🦆 El patito respondió. Escuchando...";
+
+          player.onended = () => {
+            // Cuando termine de reproducir, vuelve a grabar
+            empezarGrabacion();
+          };
+
+        } catch (err) {
+          console.error("❌ Error al enviar o recibir audio:", err);
+          estado.textContent = "❌ Error al comunicar con el servidor.";
+        }
+      };
+
+      grabando = true;
+      mediaRecorder.start();
+      ultimoSonido = Date.now();
+
+      // Función para detectar silencio y detener grabación
+      function detectarSilencio() {
+        analyser.getByteFrequencyData(dataArray);
+        const volumen = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+
+        if (volumen < umbralSilencio) {
+          if (Date.now() - ultimoSonido > maxSilencio && grabando) {
+            estado.textContent = "🛑 Silencio detectado, deteniendo grabación...";
+            mediaRecorder.stop();
+            // No detener stream para reusar
+            return;
+          }
+        } else {
+          ultimoSonido = Date.now();
+        }
+
+        if (grabando) {
+          requestAnimationFrame(detectarSilencio);
+        }
+      }
+      detectarSilencio();
+    }
+
+    // Función para iniciar la conversación (primer fetch a /iniciar)
+async function iniciarConversacion() {
+  console.log("📡 Enviando solicitud a /iniciar");
+
+  try {
+    // Paso 1: obtener texto de la conversación
+    const response = await fetch("http://127.0.0.1:8000/iniciar", {
+      method: "GET"
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en /audio: " + response.status);
+    }
+    console.log(response)
+
+    // 👇 Consumir el blob del audio
+   const audioBlob = await response.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    // 👇 Reproducir
+    const player = document.getElementById("player");
+    player.src = audioUrl;
+    console.log('llegamo aca')
+    console.log(player) 
+    await player.play(); 
+
+      player.onended = () => {
+      console.log("🎧 Reproducción terminada");
+      empezarGrabacion()
+    };
+
+
+
+  } catch (err) {
+    console.error("❌ Error al iniciar conversación:", err);
+    estado.textContent = "❌ Error al iniciar conversación.";
+  }
+}
+
+
+
+    // Al apretar el botón, deshabilitar botón y empezar conversación
+    botonIniciar.onclick = () => {
+      botonIniciar.disabled = true;
+      iniciarConversacion();
+    };
+  </script>
+</body>
+</html>
