@@ -12,6 +12,8 @@ from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
+import os
+import signal
 
 driver_global = None
 
@@ -76,13 +78,30 @@ async def conversar(audio: UploadFile = File(...)):
     return FileResponse("salida.wav", media_type="audio/wav")
 
 
-@app.post("/cerrar")
+@app.get("/cerrar")
 async def cerrar_sesion():
     global driver_global
+    print('aca estoy cerrando')
     if driver_global:
-        driver_global.quit()
+        try:
+            print("🔻 Cerrando driver con .quit()")
+            # Intenta cerrar como siempre
+            driver_global.quit()
+        except Exception as e:
+            print("⚠️ Error al cerrar con quit():", e)
+
+        try:
+            # Forzar cierre del proceso si sigue vivo
+            pid = driver_global.service.process.pid
+            print(f"🔪 Matando proceso del driver (pid: {pid})")
+            os.kill(pid, signal.SIGTERM)
+        except Exception as e:
+            print("⚠️ No se pudo matar el proceso:", e)
+
         driver_global = None
-        return {"mensaje": "Driver cerrado correctamente"}
+        print("✅ Driver cerrado completamente")
+        return {"mensaje": "Driver cerrado completamente"}
+
     return {"mensaje": "Driver ya estaba cerrado"}
 
 
