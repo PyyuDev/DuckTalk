@@ -1,9 +1,7 @@
 fastapi
 uvicorn
 selenium
-python-multipart # Para UploadFile/File en FastAPI
+python-multipart
 pydantic
 vosk
 piper-tts
-Asegúrate de agregar cualquier otra librería si usas librerías de audio como soundfile, pydub, etc.
-Si usas 'subprocess', no necesita ser listado, pero es bueno recordarlo.
