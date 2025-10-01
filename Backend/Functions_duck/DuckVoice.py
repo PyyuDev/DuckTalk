@@ -6,7 +6,11 @@ from piper import PiperConfig, PiperVoice
 with open("/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx.json", "r", encoding="utf-8") as f:
     config_dict = json.load(f)
 config = PiperConfig.from_dict(config_dict)
-voice = PiperVoice.load("/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx")
+voice = PiperVoice.load(
+    "/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx",
+    "/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx.json",
+    use_cuda=False
+)
 
 def hablar_como_pato(texto: str, archivo_salida="salida.wav"):
     """Genera un archivo de audio WAV con la voz del pato."""
