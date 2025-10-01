@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "DuckTalk",
+  "version": "1.0",
+  "description": "Activa o desactiva un div flotante en todas las páginas",
+  "permissions": ["tabs", "storage", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "cat.gif",
+        "talk.gif",
+        "duck.png",
+        "listen.png",
+        "icon.png",
+        "ducktalk.png",
+        "MickeyMousePersonalUseRegular-mLRAG.otf"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  }
+}
