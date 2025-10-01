@@ -1,0 +1,43 @@
+# Usa una imagen base de Python completa para incluir las herramientas necesarias (apt-get)
+FROM python:3.11
+
+# 1. INSTALAR DEPENDENCIAS DEL SISTEMA (CRÍTICO)
+# Se necesitan para Chrome (libnss3, libatk-bridge2.0-0, etc.) y para el procesamiento de audio/voz (libespeak-ng, alsa).
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    # Dependencias esenciales para Chrome Headless en Linux
+    libnss3 \
+    libgconf-2-4 \
+    libfontconfig1 \
+    libatk-bridge2.0-0 \
+    # Dependencias comunes para audio/voz (Piper/Vosk)
+    libespeak-ng1 \
+    libportaudio2 \
+    # ----------------------------------------------------
+    # INSTALAR GOOGLE CHROME STABLE (el navegador)
+    # ----------------------------------------------------
+    && wget -q -O - https://dl-ssl.google.com/linux/chrome/deb/ stable/main/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb || apt-get install -fy \
+    # ----------------------------------------------------
+    # Limpiar el cache del sistema
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /google-chrome-stable_current_amd64.deb
+
+# 2. CONFIGURAR EL DIRECTORIO DE TRABAJO
+WORKDIR /app
+
+# 3. COPIAR Y CONFIGURAR DEPENDENCIAS DE PYTHON
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. COPIAR CÓDIGO DE LA APLICACIÓN
+# Esto incluye tu main.py, y la carpeta Functions_duck/
+COPY . .
+
+# 5. EXPONER EL PUERTO (FastAPI usa 8000 por defecto)
+EXPOSE 8000
+
+# 6. COMANDO DE INICIO: Ejecutar tu aplicación FastAPI con Uvicorn
+# Asegúrate de cambiar 'main' por el nombre de tu archivo principal si es diferente.
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
