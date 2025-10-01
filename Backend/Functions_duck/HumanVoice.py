@@ -5,8 +5,10 @@ import subprocess
 import os
 import json
 
+
+VOSK_MODEL_PATH = os.path.join( "models", "vosk-model-small-es-0.42")
 # Cargar modelo solo una vez
-model = Model("/home/cristian/Desktop/testDuck/Backend/models/vosk-model-small-es-0.42")
+model = Model(VOSK_MODEL_PATH)
 
 def convertir_audio_a_texto(ruta_archivo: str) -> str:
     # Convertir a WAV si no está en ese formato

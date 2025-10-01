@@ -1,14 +1,19 @@
 import json
 import wave
+import os
 from piper import PiperConfig, PiperVoice
 
+MODEL_ONNX_PATH = os.path.join("models", "voice","model.onnx")
+
+MODEL_JSON_PATH = os.path.join("models", "voice","model.onnx.json")
+
 # Cargar configuración y modelo una sola vez
-with open("/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx.json", "r", encoding="utf-8") as f:
+with open(MODEL_JSON_PATH, "r", encoding="utf-8") as f:
     config_dict = json.load(f)
 config = PiperConfig.from_dict(config_dict)
 voice = PiperVoice.load(
-    "/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx",
-    "/home/cristian/Desktop/testDuck/Backend/models/voice/model.onnx.json",
+    MODEL_ONNX_PATH,
+    MODEL_JSON_PATH,
     use_cuda=False
 )
 
