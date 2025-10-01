@@ -1,0 +1,31 @@
+/* popup.css */
+@font-face {
+  font-family: 'MiFuente';
+ src: url('fonts/MickeyMousePersonalUseRegular-mLRAG.otf') format('opentype');
+}
+
+#body_duck {
+  font-family: 'MiFuente', sans-serif;
+}
+
+
+
+#body_duck{
+background-color: #9300e6;
+display: flex;
+justify-content: center;
+flex-direction: column;
+
+
+}
+
+#body_duck img{
+    width: 150px;
+}
+
+button{
+     font-family: 'MiFuente', sans-serif;
+     color: white;
+     background-color: black;
+
+}

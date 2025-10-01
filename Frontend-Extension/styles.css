@@ -1,0 +1,50 @@
+
+@font-face {
+  font-family: 'MiFuente';
+  src: url('fonts/MickeyMousePersonalUseRegular-mLRAG.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+#mi-div-flotante, 
+#mi-div-flotante button, 
+#mi-div-flotante p {
+  font-family: 'MiFuente', sans-serif;
+}
+
+
+#body_duck{
+  font-family: 'MiFuente', sans-serif;
+}
+
+
+
+
+
+
+.boton_iniciar {
+  background-color: black;
+  padding: 10px;
+  color: white;
+}
+
+.div_botones {
+  display: flex;
+  gap: 10px;
+}
+
+.div_principal {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button:disabled {
+  opacity: 0.5;            /* Le da transparencia */
+  cursor: not-allowed;     /* Cursor de "no disponible" */
+  background-color: #ccc;  /* Cambia color de fondo */
+  color: #666;             /* Cambia el color del texto */
+}
