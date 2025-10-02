@@ -1,28 +1,13 @@
-<!-- # 1. Clonar el proyecto
-git clone https://github.com/tuusuario/tu-repo.git
-cd tu-repo
-
-# 2. Crear entorno virtual
-python3 -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
-
-# 3. Instalar dependencias
-pip install -r requirements.txt
-
-# 4. Ejecutar la app
-uvicorn main:app --reload -->
-
-
 
 <h1 align="center">
   DuckTalk
    <br/>
-  <img src="duck.png" alt="DuckTalk" width="100"/>
+  <img src="./assets-readme/duck.png" alt="DuckTalk" width="100"/>
  
 
 </h1>
 
-![FastAPI Logo](ducktalk.png)
+![FastAPI Logo](/assets-readme/ducktalk.png)
 
 🗣️ ¿Eres programador y tu patito de goma no te contesta?
 
@@ -32,7 +17,6 @@ uvicorn main:app --reload -->
 🦆 ¿Qué es DuckTalk?
 
 DuckTalk es una extensión para Chrome y Firefox que te permite hablar con un patito virtual, curioso y atento, que está listo para que le cuentes todo lo que quieras.
-Ideal para practicar el famoso rubber duck debugging… ¡pero con estilo!
 
 ---
 
@@ -61,7 +45,7 @@ Ideal para practicar el famoso rubber duck debugging… ¡pero con estilo!
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ 1.Instalación Backend
 
 Sigue estos pasos para clonar y ejecutar el proyecto:
 
@@ -88,7 +72,7 @@ pip install -r requirements.txt
 #### 4. Ejecutar la app
 
 ```bash
-uvicorn main:app --reload -->
+uvicorn main:app --reload
 ```
 
 ### Opcion 2: con Docker
@@ -106,9 +90,9 @@ docker build -t ducktalk .
 docker run -d -p 8000:8000 ducktalk
 ```
 
-## Instalar la extension
+## 🛠️ 2.Instalación Frontend
 
-### Firefox
+### Firefox 🦊
 
 #### 1.Entrar al navegador a este link
 ```bash
@@ -116,23 +100,23 @@ about:debugging#/setup
 ```
 #### 2. Entra a This Firefox
 
-![FastAPI Logo](firefox-1.png)
+![FastAPI Logo](/assets-readme/firefox-1.png)
 
 #### 3. Entra a Load Temporary Add-on…
 
-![FastAPI Logo](firefox-2.png)
+![FastAPI Logo](/assets-readme/firefox-2.png)
 
 #### 4. Entrar a la carpeta Ducktalk y entrar a Extension
 
-![FastAPI Logo](firefox-3.png)
+![FastAPI Logo](/assets-readme/firefox-3.png)
 
 
 #### 4. Una vez dentro,abri el archivo DuckTalk--Firefox.xpi
 
-![FastAPI Logo](firefox-4.png)
+![FastAPI Logo](/assets-readme/firefox-4.png)
 
 
-### Chrome
+### Chrome 💩
 
 #### 1.Entrar al navegador a este link
 ```bash
@@ -140,20 +124,28 @@ chrome://extensions/
 ```
 #### 2. Activa el Developer Mode
 
-![FastAPI Logo](chrome-1.png)
+![FastAPI Logo](/assets-readme/chrome-1.png)
 
 #### 3. Entra a Load Temporary Add-on…
 
-![FastAPI Logo](chrome-2.png)
+![FastAPI Logo](/assets-readme/chrome-2.png)
 
 #### 4. Entrar a la carpeta Ducktalk y entrar a Extension
 
-![FastAPI Logo](firefox-3.png)
+![FastAPI Logo](/assets-readme/firefox-3.png)
 
 
 #### 4. Una vez dentro,selecciona la carpeta DuckTalk--Chrome
 
-![FastAPI Logo](chrome-4.png)
+![FastAPI Logo](/assets-readme/chrome-4.png)
+
+
+
+## ✅ ¡Listo para hablar con tu patito virtual! 🦆
+
+
+
+
 
 
 
