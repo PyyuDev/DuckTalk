@@ -106,7 +106,59 @@ docker build -t ducktalk .
 docker run -d -p 8000:8000 ducktalk
 ```
 
-### Instalar la extension
+## Instalar la extension
+
+### Firefox
+
+#### 1.Entrar al navegador a este link
+```bash
+about:debugging#/setup
+```
+#### 2. Entra a This Firefox
+
+![FastAPI Logo](firefox-1.png)
+
+#### 3. Entra a Load Temporary Add-on…
+
+![FastAPI Logo](firefox-2.png)
+
+#### 4. Entrar a la carpeta Ducktalk y entrar a Extension
+
+![FastAPI Logo](firefox-3.png)
+
+
+#### 4. Una vez dentro,abri el archivo DuckTalk--Firefox.xpi
+
+![FastAPI Logo](firefox-4.png)
+
+
+### Chrome
+
+#### 1.Entrar al navegador a este link
+```bash
+chrome://extensions/
+```
+#### 2. Activa el Developer Mode
+
+![FastAPI Logo](chrome-1.png)
+
+#### 3. Entra a Load Temporary Add-on…
+
+![FastAPI Logo](chrome-2.png)
+
+#### 4. Entrar a la carpeta Ducktalk y entrar a Extension
+
+![FastAPI Logo](firefox-3.png)
+
+
+#### 4. Una vez dentro,selecciona la carpeta DuckTalk--Chrome
+
+![FastAPI Logo](chrome-4.png)
+
+
+
+
+
 
 
 
