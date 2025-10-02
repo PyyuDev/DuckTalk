@@ -1,11 +1,5 @@
 
-<h1 align="center">
-  DuckTalk
-   <br/>
-  <img src="./assets-readme/duck.png" alt="DuckTalk" width="100"/>
- 
 
-</h1>
 
 ![FastAPI Logo](/assets-readme/ducktalk.jpg)
 
