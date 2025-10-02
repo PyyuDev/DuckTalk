@@ -7,7 +7,7 @@
 
 </h1>
 
-![FastAPI Logo](/assets-readme/ducktalk.png)
+![FastAPI Logo](/assets-readme/ducktalk.jpg)
 
 🗣️ ¿Eres programador y tu patito de goma no te contesta?
 
@@ -49,7 +49,7 @@ DuckTalk es una extensión para Chrome y Firefox que te permite hablar con un pa
 
 Sigue estos pasos para clonar y ejecutar el proyecto:
 
-### Opcion 1: Modo local
+### Opcion 1: Modo local 🌐
 
 #### 1. 🔽 Clonar el repositorio principal
 
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-### Opcion 2: con Docker
+### Opcion 2: con Docker 🐋
 
 
 #### 1. Construir imagen
