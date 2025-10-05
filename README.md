@@ -86,6 +86,18 @@ docker run -d -p 8000:8000 ducktalk
 
 ## 🛠️ 2.Instalación Frontend
 
+### App hecha con Electron ⚛️
+
+#### 1.Entras a la carpeta Ducktalk
+
+![FastAPI Logo](/assets-readme/electron-1.png)
+
+#### 2.Entras a la carpeta "App-Extension" y seleccionas el sistema operativo Linux,Windows
+(es un app portable es decir que haces doble click y se abre,no tenes que instalar nada)
+
+![FastAPI Logo](/assets-readme/electron-2.png)
+
+
 ### Firefox 🦊
 
 #### 1.Entrar al navegador a este link
@@ -100,7 +112,7 @@ about:debugging#/setup
 
 ![FastAPI Logo](/assets-readme/firefox-2.png)
 
-#### 4. Entrar a la carpeta Ducktalk y entrar a Extension
+#### 4. Entrar a la carpeta Ducktalk y entrar a "App-Extension"
 
 ![FastAPI Logo](/assets-readme/firefox-3.png)
 
@@ -110,28 +122,7 @@ about:debugging#/setup
 ![FastAPI Logo](/assets-readme/firefox-4.png)
 
 
-### Chrome 💩
 
-#### 1.Entrar al navegador a este link
-```bash
-chrome://extensions/
-```
-#### 2. Activa el Developer Mode
-
-![FastAPI Logo](/assets-readme/chrome-1.png)
-
-#### 3. Entra a Load Temporary Add-on…
-
-![FastAPI Logo](/assets-readme/chrome-2.png)
-
-#### 4. Entrar a la carpeta Ducktalk y entrar a Extension
-
-![FastAPI Logo](/assets-readme/firefox-3.png)
-
-
-#### 4. Una vez dentro,selecciona la carpeta DuckTalk--Chrome
-
-![FastAPI Logo](/assets-readme/chrome-4.png)
 
 
 
