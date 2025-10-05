@@ -153,6 +153,7 @@ let botonIniciar,
           seDetectoAudio = false;
         }
       } else {
+        showToast("Si no hablas en 3 segundos se corta. Cuack!")
         detenerConversacion();
 console.log('corto grabacion')
         /* showToast("Si no hablas en 3 segundo,tienes que volver a empezar la conversacion! cuack!"); */
