@@ -1,0 +1,39 @@
+FROM node:18-bullseye
+
+# Habilitar arquitectura i386 para Wine
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y \
+    wine32 \
+    wine64 \
+    xvfb \
+    curl \
+    git \
+    python3 \
+    make \
+    g++ \
+    libc6:i386 \
+    libncurses5:i386 \
+    libstdc++6:i386 \
+    libc6-dev-i386 \
+    build-essential \
+    unzip \
+    wget && \
+    rm -rf /var/lib/apt/lists/*
+
+# Configurar Wine para no mostrar ventana (necesario para electron-builder)
+ENV DISPLAY=:99
+
+# Instalar electron-builder globalmente
+RUN npm install -g electron-builder
+
+WORKDIR /app
+
+# Copiar tu proyecto al contenedor
+COPY . /app
+
+# Instalar dependencias npm dentro del contenedor
+RUN npm install && npm cache clean --force
+
+# Comando por defecto para construir para Windows usando electron-builder con wine
+CMD ["npm", "run", "build"]

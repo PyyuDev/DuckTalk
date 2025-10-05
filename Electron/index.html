@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ventana sin borde con botones personalizados</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="controls">
+      <button id="minimize" class="button_new">—</button>
+      <button id="close" class="button_new">×</button>
+    </div>
+    <div class="div_flotante">
+      <audio id="player"></audio>
+      <img
+        id="image"
+        src="./assets/duck.png"
+        alt="er"
+        width="200"
+        height="200"
+      />
+      <div class="div_botones">
+        <button id="iniciar" class="boton_iniciar">Iniciar</button>
+        <button id="detener" class="boton_iniciar" disabled>Detener</button>
+      </div>
+    </div>
+
+    <script src="./functions.js"></script>
+    <script src="./ipc.js"></script>
+  </body>
+</html>
